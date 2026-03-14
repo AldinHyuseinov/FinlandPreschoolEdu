@@ -11,6 +11,11 @@
     />
   </head>
   <body>
+    <!-- Индикатор за скрол (Progress Bar) -->
+    <div class="scroll-progress-container">
+      <div class="scroll-progress-bar" id="scroll-bar"></div>
+    </div>
+
     <div id="snow-container"></div>
     <div class="parallax-bg"></div>
 
@@ -25,7 +30,7 @@
       <!-- Образователна система -->
       <section id="system" class="section">
         <h2 class="section-title reveal">Образователната система във Финландия</h2>
-        <div class="grid-2">
+        <div class="grid-1">
           <div class="glass-card reveal slide-left">
             <p>
               <strong>Световно известна</strong> със своята равнопоставеност, висококачествено
@@ -41,8 +46,14 @@
             </p>
           </div>
           <div class="glass-card stat-card reveal slide-right">
-            <span class="big-number">90%</span>
-            <p>от учителите са удовлетворени от работата си.</p>
+            <div class="stat-item">
+              <span class="big-number">90%</span>
+              <p>от учителите са удовлетворени от работата си.</p>
+            </div>
+            <div class="stat-item">
+              <span class="big-number">92%</span>
+              <p>казват, че положителните аспекти на работата им преобладава над отрицателните.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -81,6 +92,12 @@
             </ul>
           </div>
         </div>
+
+        <div class="glass-image-wrapper reveal scale-up delay">
+          <img src="./img/Kids playing.png" alt="Деца учат сред природата" class="glass-image" />
+          <div class="image-overlay"></div>
+          <p class="image-caption">Децата често прекарват времето си в природата</p>
+        </div>
       </section>
 
       <!-- Основни приоритети -->
@@ -114,6 +131,13 @@
             <p>
               Осигуряване на учебна среда, която насочва любопитството, интереса и мотивацията им,
               давайки възможности за игра, но и за <strong>почивка и тишина</strong>.
+            </p>
+          </div>
+          <div class="timeline-item reveal slide-up">
+            <div class="dot"></div>
+            <p>
+              Избягва се академичното обучение и се набляга на
+              <strong>холистичната грижа</strong> към децата.
             </p>
           </div>
         </div>
@@ -158,29 +182,29 @@
             <thead>
               <tr>
                 <th>Характеристика</th>
-                <th class="finland-col">Финландия</th>
+                <th>Финландия</th>
                 <th>България</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Задължителна възраст</td>
-                <td class="finland-col">От 6-годишна възраст</td>
+                <td>От 6-годишна възраст</td>
                 <td>От 4-годишна възраст</td>
               </tr>
               <tr>
                 <td>Основни приоритети</td>
-                <td class="finland-col">Знания и умения за живота, човечност, емпатия</td>
+                <td>Знания и умения за живота, човечност, емпатия</td>
                 <td>Подготовка за училище</td>
               </tr>
               <tr>
                 <td>Учебна среда</td>
-                <td class="finland-col">Силна автономност на учителя и децата, малки групи</td>
+                <td>Силна автономност на учителя и децата, малки групи</td>
                 <td>По-големи групи и по-структурирана програма</td>
               </tr>
               <tr>
                 <td>Управление</td>
-                <td class="finland-col">
+                <td>
                   Децентрализирана. Гради се на доверие (държава → общини → училища). Автономията е
                   ключова.
                 </td>

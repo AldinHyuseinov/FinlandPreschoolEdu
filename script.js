@@ -1,7 +1,7 @@
 // Генериране на реалистичен сняг
 function createSnow() {
   const snowContainer = document.getElementById("snow-container");
-  const snowflakeCount = 70; // Брой снежинки
+  const snowflakeCount = 100; // Брой снежинки
 
   for (let i = 0; i < snowflakeCount; i++) {
     const snowflake = document.createElement("div");
@@ -10,7 +10,7 @@ function createSnow() {
     // Рандомизиране на позиция, размер и продължителност
     const size = Math.random() * 5 + 3; // Размери между 3px и 8px
     const left = Math.random() * 100; // Позиция от 0% до 100%
-    const duration = Math.random() * 5 + 5; // Падане между 5s и 10s
+    const duration = Math.random() * 10 + 10; // Падане между 10s и 20s
     const delay = Math.random() * 10; // Закъснение при старт
 
     snowflake.style.width = `${size}px`;
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetY = nextInfo.section.getBoundingClientRect().top + window.scrollY;
 
       // Извикваме нашата бавна функция
-      customSmoothScroll(targetY, scrollDuration);
+      customSmoothScroll(targetY + 10, scrollDuration);
     }
   });
 });
