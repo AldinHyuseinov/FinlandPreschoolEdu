@@ -1,0 +1,426 @@
+:root {
+  --bg-dark: #051221;
+  --text-main: #e2f1ff;
+  --accent-blue: #7cdff3;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --aurora: #00ffaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Background & Parallax Effect */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at top right, #002b5e, #000c18), url("./unsplash image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  z-index: -2;
+  /* Hero Scroll Animation (Modern) */
+  animation: parallax-zoom linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes parallax-zoom {
+  from {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  to {
+    transform: scale(1.1);
+    filter: brightness(0.5);
+  }
+}
+
+/* Snow */
+#snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Typography & Layout */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  text-align: center;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  /* Animate on scroll */
+  animation: hero-fade linear;
+  animation-timeline: scroll(root);
+  animation-range: 0 80vh;
+}
+
+@keyframes hero-fade {
+  to {
+    opacity: 0;
+    transform: translateY(150px) scale(0.9);
+  }
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #ffffff, var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--aurora);
+  margin-bottom: 15px;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-5px);
+}
+
+.glass-card p {
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card p,
+.glass-card li {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.glass-card ul {
+  padding-left: 20px;
+}
+.card-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--accent-blue);
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Stat Card */
+.stat-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.big-number {
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--aurora);
+  line-height: 1;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+}
+
+/* Timeline (Priorities) */
+.timeline {
+  border-left: 2px solid var(--accent-blue);
+  padding-left: 30px;
+  margin-left: 20px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  background: var(--glass-bg);
+  padding: 20px;
+  border-radius: 10px;
+}
+.timeline-item .dot {
+  position: absolute;
+  left: -41px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background: var(--aurora);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--aurora);
+}
+
+/* Table */
+.table-container {
+  overflow-x: auto;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+th,
+td {
+  padding: 20px;
+  border-bottom: 1px solid var(--glass-border);
+}
+th {
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--accent-blue);
+  font-size: 1.2rem;
+}
+.finland-col {
+  background: rgba(124, 223, 243, 0.05);
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+}
+
+/* Button for next section */
+.float-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--aurora);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.float-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.float-btn svg {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.4s ease;
+}
+
+/* Ховър ефект */
+.float-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 32px 0 rgba(124, 223, 243, 0.4);
+  transform: translateY(-5px) scale(1.05);
+}
+
+.float-btn:active {
+  transform: scale(0.95);
+}
+
+.float-btn.up-mode svg {
+  transform: rotate(180deg);
+}
+.float-btn.up-mode {
+  color: #ff7675;
+  border-color: rgba(255, 118, 117, 0.4);
+}
+
+/* --- CSS SCROLL-DRIVEN ANIMATIONS --- */
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    animation: reveal-anim linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 40%;
+  }
+
+  .slide-left {
+    animation-name: slide-left-anim;
+  }
+  .slide-right {
+    animation-name: slide-right-anim;
+  }
+  .scale-up {
+    animation-name: scale-up-anim;
+  }
+
+  @keyframes reveal-anim {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-left-anim {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes slide-right-anim {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes scale-up-anim {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.reveal:not([style]) {
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+@supports not (animation-timeline: view()) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  .reveal.slide-left {
+    transform: translateX(-50px);
+  }
+  .reveal.slide-right {
+    transform: translateX(50px);
+  }
+  .reveal.scale-up {
+    transform: scale(0.9);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translate(0) scale(1);
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 50px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    margin-left: 10px;
+  }
+}
