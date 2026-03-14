@@ -578,6 +578,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .parallax-bg {
+    animation: none;
+  }
+
+  .next-section-btn {
+    display: none;
+  }
+
   .section {
     padding: 60px 15px;
   }
@@ -663,18 +671,6 @@ footer {
     border-radius: 0;
     border-left: none;
     border-right: none;
-  }
-
-  .stat-card {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .stat-item:first-child {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 20px;
   }
 
   th,
