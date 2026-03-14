@@ -665,6 +665,18 @@ footer {
     border-right: none;
   }
 
+  .stat-card {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .stat-item:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+  }
+
   th,
   td {
     padding: 15px;
