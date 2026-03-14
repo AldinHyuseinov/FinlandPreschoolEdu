@@ -86,70 +86,95 @@ document.addEventListener("DOMContentLoaded", () => {
   createSnow();
   initScrollObserver();
 
-  if (window.innerWidth > 768) {
-    const nextBtn = document.getElementById("next-section-btn");
-    const sections = Array.from(document.querySelectorAll(".section"));
+  if (window.innerWidth <= 768) {
+    const mobileElements = document.querySelectorAll(".reveal");
 
-    // Показваме бутона малко след зареждане с анимация
-    setTimeout(() => {
-      nextBtn.classList.add("visible");
-    }, 1000);
+    const mobileObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Добавяме ексклузивния мобилен клас
+            entry.target.classList.add("mobile-reveal-active");
+            // Спираме да наблюдаваме елемента, след като е анимиран веднъж
+            mobileObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15, // Задейства се, когато 15% от елемента е видим
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
 
-    // Функция, която намира коя е следващата секция спрямо текущия скрол
-    function getNextSection() {
-      const scrollPosition = window.scrollY;
-      // Взимаме височината на екрана и добавяме малък толеранс (буфер),
-      // за да не прескача секции, ако сме скролнали само малко надолу
-      const viewportHeight = window.innerHeight;
-
-      for (let i = 0; i < sections.length; i++) {
-        const sectionTop = sections[i].offsetTop;
-
-        // Ако горният край на секцията е по-надолу от текущия ни скрол + половината екран
-        if (sectionTop > scrollPosition + viewportHeight / 2) {
-          return { section: sections[i], isLast: i === sections.length - 1 };
-        }
-      }
-      // Ако не намери следваща (вече сме най-долу), връщаме null
-      return { section: null, isLast: true };
-    }
-
-    // Слушател за скрол, за да завъртаме стрелката, ако сме най-долу
-    window.addEventListener("scroll", () => {
-      // Проверка дали сме близо до дъното на страницата
-      const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-
-      if (isAtBottom) {
-        nextBtn.classList.add("up-mode");
-        nextBtn.setAttribute("aria-label", "Към началото");
-      } else {
-        nextBtn.classList.remove("up-mode");
-        nextBtn.setAttribute("aria-label", "Към следващата секция");
-      }
-    });
-
-    // Действие при клик с новото бавно скролиране
-    nextBtn.addEventListener("click", () => {
-      // Време за скролиране в милисекунди (1500 = 1.5 секунди). Можете да го увеличите на 2000 за още по-бавно.
-      const scrollDuration = 2000;
-
-      // Проверяваме дали бутонът е в режим "Нагоре"
-      if (nextBtn.classList.contains("up-mode")) {
-        // Бавно превъртане най-горе (позиция Y = 0)
-        customSmoothScroll(0, scrollDuration);
-        return;
-      }
-
-      // Ако не сме най-долу, намираме следващата секция
-      const nextInfo = getNextSection();
-
-      if (nextInfo.section) {
-        // Намираме точната Y координата на следващата секция спрямо целия документ
-        const targetY = nextInfo.section.getBoundingClientRect().top + window.scrollY;
-
-        // Извикваме нашата бавна функция
-        customSmoothScroll(targetY + 10, scrollDuration);
-      }
+    mobileElements.forEach((el) => {
+      // Първоначално скриваме елемента само за тези, които поддържат анимация
+      el.style.opacity = "0";
+      mobileObserver.observe(el);
     });
   }
+
+  const nextBtn = document.getElementById("next-section-btn");
+  const sections = Array.from(document.querySelectorAll(".section"));
+
+  // Показваме бутона малко след зареждане с анимация
+  setTimeout(() => {
+    nextBtn.classList.add("visible");
+  }, 1000);
+
+  // Функция, която намира коя е следващата секция спрямо текущия скрол
+  function getNextSection() {
+    const scrollPosition = window.scrollY;
+    // Взимаме височината на екрана и добавяме малък толеранс (буфер),
+    // за да не прескача секции, ако сме скролнали само малко надолу
+    const viewportHeight = window.innerHeight;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sectionTop = sections[i].offsetTop;
+
+      // Ако горният край на секцията е по-надолу от текущия ни скрол + половината екран
+      if (sectionTop > scrollPosition + viewportHeight / 2) {
+        return { section: sections[i], isLast: i === sections.length - 1 };
+      }
+    }
+    // Ако не намери следваща (вече сме най-долу), връщаме null
+    return { section: null, isLast: true };
+  }
+
+  // Слушател за скрол, за да завъртаме стрелката, ако сме най-долу
+  window.addEventListener("scroll", () => {
+    // Проверка дали сме близо до дъното на страницата
+    const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+
+    if (isAtBottom) {
+      nextBtn.classList.add("up-mode");
+      nextBtn.setAttribute("aria-label", "Към началото");
+    } else {
+      nextBtn.classList.remove("up-mode");
+      nextBtn.setAttribute("aria-label", "Към следващата секция");
+    }
+  });
+
+  // Действие при клик с новото бавно скролиране
+  nextBtn.addEventListener("click", () => {
+    // Време за скролиране в милисекунди (1500 = 1.5 секунди). Можете да го увеличите на 2000 за още по-бавно.
+    const scrollDuration = 2000;
+
+    // Проверяваме дали бутонът е в режим "Нагоре"
+    if (nextBtn.classList.contains("up-mode")) {
+      // Бавно превъртане най-горе (позиция Y = 0)
+      customSmoothScroll(0, scrollDuration);
+      return;
+    }
+
+    // Ако не сме най-долу, намираме следващата секция
+    const nextInfo = getNextSection();
+
+    if (nextInfo.section) {
+      // Намираме точната Y координата на следващата секция спрямо целия документ
+      const targetY = nextInfo.section.getBoundingClientRect().top + window.scrollY;
+
+      // Извикваме нашата бавна функция
+      customSmoothScroll(targetY + 10, scrollDuration);
+    }
+  });
 });

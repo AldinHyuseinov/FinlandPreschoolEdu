@@ -391,7 +391,6 @@ tr td:first-child {
   transition: transform 0.4s ease;
 }
 
-/* Ховър ефект */
 .float-btn:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: var(--accent-blue);
@@ -578,12 +577,59 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  @keyframes mobileSoftRise {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes auroraBorder {
+    0% {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      border-color: var(--aurora);
+    }
+    100% {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .mobile-reveal-active {
+    animation: mobileSoftRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+  }
+
+  .glass-card.mobile-reveal-active {
+    animation:
+      mobileSoftRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+      auroraBorder 3s infinite ease-in-out 0.8s !important;
+  }
+
   .parallax-bg {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-attachment: scroll;
+    transform: none;
     animation: none;
   }
 
-  .next-section-btn {
-    display: none;
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
   }
 
   .section {
