@@ -124,15 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Функция, която намира коя е следващата секция спрямо текущия скрол
   function getNextSection() {
     const scrollPosition = window.scrollY;
-    // Взимаме височината на екрана и добавяме малък толеранс (буфер),
-    // за да не прескача секции, ако сме скролнали само малко надолу
-    const viewportHeight = window.innerHeight;
+    const buffer = 50;
 
     for (let i = 0; i < sections.length; i++) {
       const sectionTop = sections[i].offsetTop;
 
       // Ако горният край на секцията е по-надолу от текущия ни скрол + половината екран
-      if (sectionTop > scrollPosition + viewportHeight / 2) {
+      if (sectionTop > scrollPosition + buffer) {
         return { section: sections[i], isLast: i === sections.length - 1 };
       }
     }

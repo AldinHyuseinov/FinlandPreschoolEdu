@@ -25,6 +25,26 @@ ul li {
   list-style: none;
 }
 
+/* --- Text alignment --- */
+.glass-card p,
+.glass-card li,
+.modern-table td,
+.timeline-item p {
+  text-justify: inter-word;
+}
+
+.stat-item p,
+.big-number,
+.image-caption,
+.thank-you-title,
+.presentation-card p {
+  text-align: center;
+}
+
+.modern-table td.char-name {
+  text-align: left;
+}
+
 /* Scroll Progress Bar */
 .scroll-progress-container {
   position: fixed;
@@ -147,7 +167,22 @@ ul li {
 .section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px 20px;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 80px 20px;
+  position: relative;
+}
+
+.section > .container,
+.section > .grid-1,
+.section > .grid-2,
+.section > .grid-3 {
+  width: 100%;
 }
 
 .section-title {
@@ -497,12 +532,63 @@ tr td:first-child {
   }
 }
 
-footer {
-  text-align: center;
-  padding: 40px;
-  border-top: 1px solid var(--glass-border);
+/* --- Footer --- */
+.glass-footer {
+  position: relative;
   margin-top: 50px;
-  background: rgba(0, 0, 0, 0.5);
+  padding: 40px 20px;
+  background: rgba(0, 12, 24, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.github-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 25px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: #e2f1ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.github-btn:hover {
+  background: rgba(124, 223, 243, 0.1);
+  border-color: var(--aurora);
+  color: var(--aurora);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 255, 170, 0.2);
+}
+
+.github-btn:hover .github-icon {
+  transform: scale(1.1);
+}
+
+.github-icon {
+  transition: transform 0.3s ease;
 }
 
 /* Images */
@@ -576,7 +662,97 @@ footer {
   transition-delay: 0.4s;
 }
 
+/* --- Final --- */
+#presentation-end {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.presentation-card {
+  max-width: 800px;
+  width: 100%;
+  padding: 80px 40px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 255, 170, 0.05));
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(0, 255, 170, 0.05);
+  animation:
+    softRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    auroraBorder 3s infinite ease-in-out 0.8s;
+}
+
+.thank-you-title {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  color: var(--aurora);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+}
+
+.presentation-card p {
+  font-size: 1.3rem;
+  color: #e2f1ff;
+  margin-bottom: 50px;
+  opacity: 0.9;
+}
+
+.qr-code-wrapper {
+  display: inline-block;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(124, 223, 243, 0.3);
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease;
+}
+
+.qr-code-wrapper:hover {
+  transform: scale(1.08) translateY(-10px);
+  box-shadow: 0 15px 50px rgba(0, 255, 170, 0.5);
+}
+
+.qr-code {
+  display: block;
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+}
+
+@keyframes softRise {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes auroraBorder {
+  0% {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    border-color: var(--aurora);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 @media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+    animation: none;
+  }
+
   .reveal {
     animation: none;
     opacity: 1;
@@ -584,37 +760,14 @@ footer {
     transition: none;
   }
 
-  @keyframes mobileSoftRise {
-    from {
-      opacity: 0;
-      transform: translateY(30px) scale(0.98);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes auroraBorder {
-    0% {
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    50% {
-      border-color: var(--aurora);
-    }
-    100% {
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-
   .mobile-reveal-active {
-    animation: mobileSoftRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+    animation: softRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
   .glass-card.mobile-reveal-active {
     animation:
-      mobileSoftRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
-      auroraBorder 3s infinite ease-in-out 0.8s !important;
+      softRise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+      auroraBorder 3s infinite ease-in-out 0.8s;
   }
 
   .parallax-bg {
@@ -653,6 +806,7 @@ footer {
     margin-bottom: 25px;
     padding: 15px;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   .modern-table td {
@@ -661,6 +815,11 @@ footer {
     border: none;
     display: flex;
     flex-direction: column;
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    min-width: 0;
   }
 
   .modern-table td.char-name {
@@ -699,7 +858,24 @@ footer {
   }
 
   .section {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     padding: 60px 15px;
+  }
+
+  .grid-1,
+  .grid-2,
+  .grid-3 {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .hero h1 {
@@ -808,6 +984,20 @@ footer {
 
   .scroll-progress-container {
     height: 3px;
+  }
+
+  .glass-footer {
+    padding: 30px 15px;
+    margin-top: 0;
+  }
+
+  .footer-content p {
+    font-size: 0.85rem;
+  }
+
+  .github-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   @supports not (animation-timeline: view()) {
