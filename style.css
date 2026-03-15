@@ -125,6 +125,8 @@ ul li {
 }
 
 .snowflake {
+  will-change: transform;
+  transform: translateZ(0);
   position: absolute;
   top: -10px;
   border-radius: 50%;
@@ -156,10 +158,10 @@ ul li {
 @keyframes sway {
   0%,
   100% {
-    margin-left: -15px;
+    margin-left: -30px;
   }
   50% {
-    margin-left: 15px;
+    margin-left: 30px;
   }
 }
 
@@ -770,12 +772,37 @@ tr td:first-child {
       auroraBorder 3s infinite ease-in-out 0.8s;
   }
 
-  .parallax-bg {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    background-attachment: scroll;
-    transform: none;
+  @media (max-width: 768px) {
+    .parallax-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-attachment: scroll !important;
+      transform: translateZ(0) !important;
+      animation: none !important;
+      will-change: transform;
+    }
+
+    #snow-container,
+    #snow-layer {
+      z-index: 9999;
+      animation: none;
+      transform: translateZ(0);
+    }
+
+    .glass-card,
+    .table-container,
+    .glass-footer,
+    .presentation-card,
+    .modern-table tr,
+    .timeline-item {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translateZ(0);
+      will-change: transform, backdrop-filter;
+    }
   }
 
   .modern-table thead {
@@ -799,8 +826,6 @@ tr td:first-child {
 
   .modern-table tr {
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border) !important;
     border-radius: 20px;
     margin-bottom: 25px;
@@ -903,8 +928,6 @@ tr td:first-child {
   .glass-card {
     padding: 25px;
     border-radius: 15px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
   }
 
   .card-title {
@@ -945,8 +968,6 @@ tr td:first-child {
   .timeline-item {
     padding: 15px;
     margin-bottom: 25px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
   }
 
   .timeline-item .dot {

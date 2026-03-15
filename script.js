@@ -1,7 +1,9 @@
 // Генериране на реалистичен сняг
 function createSnow() {
   const snowContainer = document.getElementById("snow-container");
-  const snowflakeCount = 100; // Брой снежинки
+
+  const isMobile = window.innerWidth <= 768;
+  const snowflakeCount = isMobile ? 30 : 100;
 
   for (let i = 0; i < snowflakeCount; i++) {
     const snowflake = document.createElement("div");
